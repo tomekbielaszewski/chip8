@@ -20,5 +20,6 @@ public class Opcode_8XY5 implements Opcode {
         }
 
         vm.V[x] = (byte) (vm.V[x] - vm.V[y]);
+
     }
 }
