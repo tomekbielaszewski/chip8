@@ -17,7 +17,7 @@ public class Opcode_8XY0Test {
     }
 
     @Test
-    public void shouldResultWithAllSetBits() throws Exception {
+    public void shouldResultWithCopiedValue() throws Exception {
         short code = (short) 0x8120;
         byte x = 0b00000000;
         byte y = 0b00110010;

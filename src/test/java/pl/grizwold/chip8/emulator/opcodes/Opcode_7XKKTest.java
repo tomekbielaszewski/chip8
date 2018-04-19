@@ -17,7 +17,7 @@ public class Opcode_7XKKTest {
     }
 
     @Test
-    public void shouldResultWithAllSetBits() throws Exception {
+    public void shouldResultWithSumOfGivenValueAndRegisterValue() throws Exception {
         short code = (short) 0x71aa;
         byte x = 1;
         byte addition = (byte) 0xaa;
@@ -27,5 +27,4 @@ public class Opcode_7XKKTest {
 
         assertTrue(vm.V[1] == x + addition);
     }
-
 }
