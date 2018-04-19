@@ -10,7 +10,7 @@ public class Opcode_6XKK implements Opcode {
 
     @Override
     public void execute(short code, VirtualMachine vm) {
-        short x = (short) ((code & 0x0F00) >>> (8*2));
+        short x = (short) ((code & 0x0F00) >>> (8));
         byte kk = (byte) (code & 0x00FF);
 
         vm.V[x] = kk;
