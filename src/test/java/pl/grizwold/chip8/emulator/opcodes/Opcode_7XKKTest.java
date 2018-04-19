@@ -5,28 +5,27 @@ import pl.grizwold.chip8.emulator.VirtualMachine;
 
 import static org.junit.Assert.*;
 
-public class Opcode_8XY0Test {
+public class Opcode_7XKKTest {
     private final VirtualMachine vm = new VirtualMachine();
-    private final Opcode opcode = new Opcode_8XY0();
+    private final Opcode opcode = new Opcode_7XKK();
 
     @Test
     public void shouldAcceptCodeWizMask8007() throws Exception {
-        short code = (short) 0x8aa0;
+        short code = (short) 0x7aab;
 
         assertTrue(opcode.accept(code));
     }
 
     @Test
     public void shouldResultWithAllSetBits() throws Exception {
-        short code = (short) 0x8120;
-        byte x = 0b00000000;
-        byte y = 0b00110010;
+        short code = (short) 0x71aa;
+        byte x = 1;
+        byte addition = (byte) 0xaa;
         vm.V[1] = x;
-        vm.V[2] = y;
 
         opcode.execute(code, vm);
 
-        assertTrue(vm.V[1] == y);
-        assertTrue(vm.V[2] == y);
+        assertTrue(vm.V[1] == x + addition);
     }
+
 }
