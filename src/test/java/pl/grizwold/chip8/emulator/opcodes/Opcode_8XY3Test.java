@@ -18,7 +18,7 @@ public class Opcode_8XY3Test {
 
     @Test
     public void shouldResultWithAllSetBits() throws Exception {
-        short code = (short) 0x8124;
+        short code = (short) 0x8123;
         byte x = (byte) 0b11111111;
         byte y = 0b00000000;
         vm.V[1] = x;
@@ -32,7 +32,7 @@ public class Opcode_8XY3Test {
 
     @Test
     public void shouldResultWithAllUnsetBits() throws Exception {
-        short code = (short) 0x8124;
+        short code = (short) 0x8123;
         byte x = 0b00000000;
         byte y = 0b00000000;
         vm.V[1] = x;
