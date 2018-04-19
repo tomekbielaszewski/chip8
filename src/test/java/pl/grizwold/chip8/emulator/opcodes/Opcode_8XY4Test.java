@@ -18,11 +18,29 @@ public class Opcode_8XY4Test {
 
     @Test
     public void shouldAddWithoutOverflow() throws Exception {
+        short code = (short) 0x8124;
+        byte x = 100;
+        byte y = 27;
+        vm.V[1] = x;
+        vm.V[2] = y;
 
+        opcode.execute(code, vm);
+
+        assertTrue(vm.V[1] == 127);
+        assertTrue(vm.V[15] == 0);
     }
 
     @Test
     public void shouldAddWithOverflow() throws Exception {
+        short code = (short) 0x8124;
+        byte x = 100;
+        byte y = 28;
+        vm.V[1] = x;
+        vm.V[2] = y;
 
+        opcode.execute(code, vm);
+
+        assertTrue(vm.V[1] == -128);
+        assertTrue(vm.V[15] == 1);
     }
 }
