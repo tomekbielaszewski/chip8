@@ -3,8 +3,8 @@ package pl.grizwold.chip8.emulator;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class StackTest {
     private Stack stack = new Stack();
@@ -24,10 +24,8 @@ public class StackTest {
         stack.push(pushedValue);
 
         short topOnStack = stack.pop();
-        short secondOnStack = stack.pop();
 
         assertThat(topOnStack, is(pushedValue));
-        assertThat(secondOnStack, is((short) 0x000));
     }
 
     @Test
@@ -53,23 +51,19 @@ public class StackTest {
     }
 
     @Test
-    public void shouldForgetFirstValueWhenExceededCapacity() throws Exception {
-        short firstValue = 0x666;
-        short otherValue = 0xaaa;
-        stack.push(firstValue);
-        stack.push(otherValue);
-        stack.push(otherValue);
-        stack.push(otherValue);
-        stack.push(otherValue);
+    public void shouldNotOverwriteLastValueWhenExceededCapacity() throws Exception {
+        short lastValuePushedWhenInCapacity = -1;
+        for (int i = 0; i < 16; i++) {
+            lastValuePushedWhenInCapacity = (short) i;
+            stack.push((short) i);
+        }
+
+        short valueWhenExceededCapacity = 1234;
+        stack.push(valueWhenExceededCapacity);
 
         short topOnStack = stack.pop();
-        stack.pop();
-        stack.pop();
-        stack.pop();
-        short outOfStackCapacity = stack.pop();
 
-        assertThat(topOnStack, is(otherValue));
-        assertThat(outOfStackCapacity, not(is(firstValue)));
-        assertThat(outOfStackCapacity, is((short) 0x000));
+        assertTrue(topOnStack == lastValuePushedWhenInCapacity);
+        assertTrue(topOnStack != valueWhenExceededCapacity);
     }
 }
