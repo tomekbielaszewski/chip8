@@ -10,8 +10,8 @@ public class Opcode_5XY0 implements Opcode {
 
     @Override
     public void execute(short code, VirtualMachine vm) {
-        short x = (short) ((code & 0x0F00) >>> (8));
-        short y = (short) ((code & 0x00F0) >>> (4));
+        short x = (short) ((code & 0x0F00) >>> 8);
+        short y = (short) ((code & 0x00F0) >>> 4);
 
         if(vm.V[x] == vm.V[y]) {
             vm.PC += 2;
