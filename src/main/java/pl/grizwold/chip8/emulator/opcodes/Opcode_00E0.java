@@ -12,7 +12,7 @@ public class Opcode_00E0 implements Opcode {
     @Override
     public void execute(short code, VirtualMachine vm) {
         for (int i = 0; i < vm.screen.length; i++) {
-            vm.screen[i] = false;
+            vm.screen[i] = 0;
         }
     }
 }

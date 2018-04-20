@@ -24,8 +24,8 @@ public class Opcode_00E0Test {
         opcode.execute(code, vm);
 
         for (int i = 0; i < vm.screen.length; i++) {
-            boolean pixel = vm.screen[i];
-            assertFalse(pixel);
+            byte pixel = vm.screen[i];
+            assertTrue(pixel == 0);
         }
     }
 
@@ -33,14 +33,14 @@ public class Opcode_00E0Test {
     public void shouldClearDisplayWhenAllWereOn() throws Exception {
         short code = (short) 0x00E0;
         for (int i = 0; i < vm.screen.length; i++) {
-            vm.screen[i] = true;
+            vm.screen[i] = (byte) 0xff;
         }
 
         opcode.execute(code, vm);
 
         for (int i = 0; i < vm.screen.length; i++) {
-            boolean pixel = vm.screen[i];
-            assertFalse(pixel);
+            byte pixel = vm.screen[i];
+            assertTrue(pixel == 0);
         }
     }
 }
