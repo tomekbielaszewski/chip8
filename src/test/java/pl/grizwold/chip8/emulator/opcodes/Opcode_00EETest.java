@@ -17,7 +17,7 @@ public class Opcode_00EETest {
     }
 
     @Test
-    public void shouldResultWithProgramCounterSetToTopOfStack() throws Exception {
+    public void shouldSetProgramCounterToTopOfStack() throws Exception {
         short code = (short) 0x00ee;
         short pcBefore = 0x7fff;
         short topOfStackBefore = 0x6743;
@@ -30,7 +30,7 @@ public class Opcode_00EETest {
     }
 
     @Test
-    public void shouldResultWithProgramCounterZeroedWhenStackEmpty() throws Exception {
+    public void shouldProgramCounterBeZeroedWhenStackEmpty() throws Exception {
         short code = (short) 0x00ee;
         vm.PC = (short) 0x7fff;
 
@@ -40,7 +40,7 @@ public class Opcode_00EETest {
     }
 
     @Test
-    public void shouldResultWithProgramCounterSetToLatestStackPush() throws Exception {
+    public void shouldSetProgramCounterToLatestStackPush() throws Exception {
         short code = (short) 0x00ee;
         short pcBefore = 0x7fff;
         short firstPush = 0x6743;

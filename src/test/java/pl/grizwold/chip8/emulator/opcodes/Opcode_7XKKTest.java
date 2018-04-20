@@ -10,7 +10,7 @@ public class Opcode_7XKKTest {
     private final Opcode opcode = new Opcode_7XKK();
 
     @Test
-    public void shouldAcceptCodeWizMask8007() throws Exception {
+    public void shouldAcceptCode() throws Exception {
         short code = (short) 0x7aab;
 
         assertTrue(opcode.accept(code));

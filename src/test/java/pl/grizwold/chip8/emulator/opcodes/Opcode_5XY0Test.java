@@ -10,14 +10,14 @@ public class Opcode_5XY0Test {
     private final Opcode opcode = new Opcode_5XY0();
 
     @Test
-    public void shouldAcceptCodeWizMask8007() throws Exception {
+    public void shouldAcceptCode() throws Exception {
         short code = (short) 0x5aa0;
 
         assertTrue(opcode.accept(code));
     }
 
     @Test
-    public void shouldResultWithIncrementedProgramCounter() throws Exception {
+    public void shouldIncrementProgramCounterWhenRegistersAreEqual() throws Exception {
         short code = (short) 0x5120;
         byte x = 2;
         byte y = 2;
@@ -34,7 +34,7 @@ public class Opcode_5XY0Test {
     }
 
     @Test
-    public void shouldResultWithNonChangedProgramCounter() throws Exception {
+    public void shouldNotIncrementProgramCounterWhenRegistersAreNotEqual() throws Exception {
         short code = (short) 0x5120;
         byte x = 1;
         byte y = 2;

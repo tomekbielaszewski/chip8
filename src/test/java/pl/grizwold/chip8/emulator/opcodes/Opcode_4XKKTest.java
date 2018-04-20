@@ -10,14 +10,14 @@ public class Opcode_4XKKTest {
     private final Opcode opcode = new Opcode_4XKK();
 
     @Test
-    public void shouldAcceptCodeWizMask8007() throws Exception {
+    public void shouldAcceptCode() throws Exception {
         short code = (short) 0x4abb;
 
         assertTrue(opcode.accept(code));
     }
 
     @Test
-    public void shouldResultWithIncrementedProgramCounter() throws Exception {
+    public void shouldIncrementProgramCounterWhenRegisterNotEqualToValueInOpcode() throws Exception {
         short code = (short) 0x4122;
         byte x = 0x23;
         short pc = 100;
@@ -31,7 +31,7 @@ public class Opcode_4XKKTest {
     }
 
     @Test
-    public void shouldResultWithNotIncrementedProgramCounter() throws Exception {
+    public void shouldNotIncrementProgramCounterWhenRegisterEqualToValueInOpcode() throws Exception {
         short code = (short) 0x4122;
         byte x = 0x22;
         short pc = 100;

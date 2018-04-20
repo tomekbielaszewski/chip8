@@ -10,14 +10,14 @@ public class Opcode_1NNNTest {
     private final Opcode opcode = new Opcode_1NNN();
 
     @Test
-    public void shouldAcceptCodeWizMask8007() throws Exception {
+    public void shouldAcceptCode() throws Exception {
         short code = (short) 0x1abb;
 
         assertTrue(opcode.accept(code));
     }
 
     @Test
-    public void shouldResultWithIncrementedProgramCounter() throws Exception {
+    public void shouldSetProgramCounterToOpcode() throws Exception {
         short code = (short) 0x1aaa;
         short pcBefore = 0x7fff;
         vm.PC = pcBefore;

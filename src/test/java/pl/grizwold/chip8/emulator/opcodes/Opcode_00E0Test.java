@@ -18,7 +18,7 @@ public class Opcode_00E0Test {
     }
 
     @Test
-    public void shouldResultWithBlankDisplayByDefault() throws Exception {
+    public void shouldClearDisplayByDefault() throws Exception {
         short code = (short) 0x00E0;
 
         opcode.execute(code, vm);
@@ -30,7 +30,7 @@ public class Opcode_00E0Test {
     }
 
     @Test
-    public void shouldResultWithBlankDisplayWhenAllWereOn() throws Exception {
+    public void shouldClearDisplayWhenAllWereOn() throws Exception {
         short code = (short) 0x00E0;
         for (int i = 0; i < vm.screen.length; i++) {
             vm.screen[i] = true;
