@@ -11,31 +11,31 @@ public class StackTest {
 
     @Test
     public void shouldInitializeZeroedStack() throws Exception {
-        assertThat(stack.pop(), is((short) 0x00));
-        assertThat(stack.pop(), is((short) 0x00));
-        assertThat(stack.pop(), is((short) 0x00));
-        assertThat(stack.pop(), is((short) 0x00));
-        assertThat(stack.pop(), is((short) 0x00)); //and one out of max capacity
+        assertThat(stack.pop(), is((short) 0x000));
+        assertThat(stack.pop(), is((short) 0x000));
+        assertThat(stack.pop(), is((short) 0x000));
+        assertThat(stack.pop(), is((short) 0x000));
+        assertThat(stack.pop(), is((short) 0x000)); //and one out of max capacity
     }
 
     @Test
     public void shouldPopSameValueAsPushed() throws Exception {
-        short pushedValue = 0xff;
+        short pushedValue = 0xeee;
         stack.push(pushedValue);
 
         short topOnStack = stack.pop();
         short secondOnStack = stack.pop();
 
         assertThat(topOnStack, is(pushedValue));
-        assertThat(secondOnStack, is((short) 0x00));
+        assertThat(secondOnStack, is((short) 0x000));
     }
 
     @Test
     public void shouldPopSameValuesAsPushed() throws Exception {
-        short pushedValue1 = 0x11;
-        short pushedValue2 = 0x22;
-        short pushedValue3 = 0x33;
-        short pushedValue4 = 0x44;
+        short pushedValue1 = 0x111;
+        short pushedValue2 = 0x222;
+        short pushedValue3 = 0x333;
+        short pushedValue4 = 0x444;
         stack.push(pushedValue1);
         stack.push(pushedValue2);
         stack.push(pushedValue3);
@@ -54,8 +54,8 @@ public class StackTest {
 
     @Test
     public void shouldForgetFirstValueWhenExceededCapacity() throws Exception {
-        short firstValue = 0x66;
-        short otherValue = 0xaa;
+        short firstValue = 0x666;
+        short otherValue = 0xaaa;
         stack.push(firstValue);
         stack.push(otherValue);
         stack.push(otherValue);
@@ -70,6 +70,6 @@ public class StackTest {
 
         assertThat(topOnStack, is(otherValue));
         assertThat(outOfStackCapacity, not(is(firstValue)));
-        assertThat(outOfStackCapacity, is((short) 0x00));
+        assertThat(outOfStackCapacity, is((short) 0x000));
     }
 }
