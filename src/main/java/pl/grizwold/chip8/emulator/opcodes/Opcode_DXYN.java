@@ -17,6 +17,18 @@ public class Opcode_DXYN implements Opcode {
         short y = (short) ((code & 0x00F0) >>> 4);
         short n = (short) (code & 0x000F);
 
-        throw new NotImplementedException();
+        byte sprite = loadSprite(n, vm);
+        boolean collision = drawSprite(x, y, sprite, vm);
+        vm.V[15] = (byte) (collision ? 1 : 0);
     }
+
+    private byte loadSprite(short n, VirtualMachine vm) {
+        return 0;
+    }
+
+    private boolean drawSprite(short x, short y, byte sprite, VirtualMachine vm) {
+        return false;
+    }
+
+
 }

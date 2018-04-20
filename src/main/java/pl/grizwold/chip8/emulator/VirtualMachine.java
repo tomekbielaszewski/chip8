@@ -15,5 +15,5 @@ public class VirtualMachine {
     public byte soundTimer = 0;
 
     public short keyboard = 0;
-    public byte[] screen = new byte[64/8*32];
+    public byte[] screen = new byte[64*32];
 }
