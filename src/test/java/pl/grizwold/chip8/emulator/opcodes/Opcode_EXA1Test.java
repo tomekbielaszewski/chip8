@@ -5,20 +5,20 @@ import pl.grizwold.chip8.emulator.VirtualMachine;
 
 import static org.junit.Assert.*;
 
-public class Opcode_EK9ETest {
+public class Opcode_EXA1Test {
     private final VirtualMachine vm = new VirtualMachine();
-    private final Opcode opcode = new Opcode_EK9E();
+    private final Opcode opcode = new Opcode_EXA1();
 
     @Test
     public void shouldAcceptCode() throws Exception {
-        short code = (short) 0xE19E;
+        short code = (short) 0xE1A1;
 
         assertTrue(opcode.accept(code));
     }
 
     @Test
-    public void shouldIncrementPCWhenKeyCodeInRegisterCorrespondsToKeyboard() throws Exception {
-        short code = (short) 0xE19E;
+    public void shouldPCStayTheSameWhenKeyCodeInRegisterCorrespondsToKeyboard() throws Exception {
+        short code = (short) 0xE1A1;
         short pcBefore = 100;
         vm.V[1] = 5;
         vm.PC = pcBefore;
@@ -26,12 +26,12 @@ public class Opcode_EK9ETest {
 
         opcode.execute(code, vm);
 
-        assertTrue(vm.PC == pcBefore + 2);
+        assertTrue(vm.PC == pcBefore);
     }
 
     @Test
-    public void shouldIncrementPCWhenAllKeysOnKeyboardArePressed() throws Exception {
-        short code = (short) 0xE19E;
+    public void shouldPCStayTheSameWhenAllKeysOnKeyboardArePressed() throws Exception {
+        short code = (short) 0xE1A1;
         short pcBefore = 100;
         vm.V[1] = 5;
         vm.PC = pcBefore;
@@ -39,12 +39,12 @@ public class Opcode_EK9ETest {
 
         opcode.execute(code, vm);
 
-        assertTrue(vm.PC == pcBefore + 2);
+        assertTrue(vm.PC == pcBefore);
     }
 
     @Test
-    public void shouldPCStayTheSameWhenKeyCodeInRegisterIsCloseToKeyboardFlagButNotExact() throws Exception {
-        short code = (short) 0xE19E;
+    public void shouldIncrementPCWhenKeyCodeInRegisterIsCloseToKeyboardFlagButNotExact() throws Exception {
+        short code = (short) 0xE1A1;
         short pcBefore = 100;
         vm.V[1] = 5;
         vm.PC = pcBefore;
@@ -52,12 +52,12 @@ public class Opcode_EK9ETest {
 
         opcode.execute(code, vm);
 
-        assertTrue(vm.PC == pcBefore);
+        assertTrue(vm.PC == pcBefore + 2);
     }
 
     @Test
-    public void shouldPCStayTheSameWhenNoKeysPressed() throws Exception {
-        short code = (short) 0xE19E;
+    public void shouldIncrementPCWhenNoKeysPressed() throws Exception {
+        short code = (short) 0xE1A1;
         short pcBefore = 100;
         vm.V[1] = 5;
         vm.PC = pcBefore;
@@ -65,6 +65,6 @@ public class Opcode_EK9ETest {
 
         opcode.execute(code, vm);
 
-        assertTrue(vm.PC == pcBefore);
+        assertTrue(vm.PC == pcBefore + 2);
     }
 }
