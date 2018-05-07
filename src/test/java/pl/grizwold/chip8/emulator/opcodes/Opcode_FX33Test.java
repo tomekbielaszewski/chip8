@@ -17,9 +17,67 @@ public class Opcode_FX33Test {
     }
 
     @Test
-    public void shouldSetVxToDelayTimer() throws Exception {
+    public void shouldSetConsecutiveMemoryLocationsToDigitsOf123() throws Exception {
         short code = (short) 0xFA33;
+        vm.V[0xA] = 123;
+        vm.I = 1234;
 
         opcode.execute(code, vm);
+
+        assertTrue(vm.memory[1234] == 1);
+        assertTrue(vm.memory[1235] == 2);
+        assertTrue(vm.memory[1236] == 3);
+    }
+
+    @Test
+    public void shouldSetConsecutiveMemoryLocationsToZero() throws Exception {
+        short code = (short) 0xFA33;
+        vm.V[0xA] = 0;
+        vm.I = 1234;
+
+        opcode.execute(code, vm);
+
+        assertTrue(vm.memory[1234] == 0);
+        assertTrue(vm.memory[1235] == 0);
+        assertTrue(vm.memory[1236] == 0);
+    }
+
+    @Test
+    public void shouldSetConsecutiveMemoryLocationsTo030() throws Exception {
+        short code = (short) 0xFA33;
+        vm.V[0xA] = 30;
+        vm.I = 1234;
+
+        opcode.execute(code, vm);
+
+        assertTrue(vm.memory[1234] == 0);
+        assertTrue(vm.memory[1235] == 3);
+        assertTrue(vm.memory[1236] == 0);
+    }
+
+    @Test
+    public void shouldSetConsecutiveMemoryLocationsTo003() throws Exception {
+        short code = (short) 0xFA33;
+        vm.V[0xA] = 3;
+        vm.I = 1234;
+
+        opcode.execute(code, vm);
+
+        assertTrue(vm.memory[1234] == 0);
+        assertTrue(vm.memory[1235] == 0);
+        assertTrue(vm.memory[1236] == 3);
+    }
+
+    @Test
+    public void shouldSetConsecutiveMemoryLocationsTo101() throws Exception {
+        short code = (short) 0xFA33;
+        vm.V[0xA] = 101;
+        vm.I = 1234;
+
+        opcode.execute(code, vm);
+
+        assertTrue(vm.memory[1234] == 1);
+        assertTrue(vm.memory[1235] == 0);
+        assertTrue(vm.memory[1236] == 1);
     }
 }
