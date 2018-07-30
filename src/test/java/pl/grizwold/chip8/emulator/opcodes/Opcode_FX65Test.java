@@ -2,6 +2,7 @@ package pl.grizwold.chip8.emulator.opcodes;
 
 import org.junit.Test;
 import pl.grizwold.chip8.emulator.VirtualMachine;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import static org.junit.Assert.*;
 
@@ -17,9 +18,38 @@ public class Opcode_FX65Test {
     }
 
     @Test
-    public void shouldSetVxToDelayTimer() throws Exception {
+    public void shouldCopyOnlyFirstRegister() throws Exception {
         short code = (short) 0xFA65;
 
         opcode.execute(code, vm);
+
+        throw new NotImplementedException();
+    }
+
+    @Test
+    public void shouldCopyAllRegisters() throws Exception {
+        short code = (short) 0xFA65;
+
+        opcode.execute(code, vm);
+
+        throw new NotImplementedException();
+    }
+
+    @Test
+    public void shouldCopyXRegisters() throws Exception {
+        short code = (short) 0xFA65;
+
+        opcode.execute(code, vm);
+
+        throw new NotImplementedException();
+    }
+
+    @Test
+    public void shouldChangeMemoryPointer() throws Exception {
+        short code = (short) 0xFA65;
+
+        opcode.execute(code, vm);
+
+        throw new NotImplementedException();
     }
 }
