@@ -13,6 +13,7 @@ public class Opcode_FX55 implements Opcode {
     public void execute(short code, VirtualMachine vm) {
         short x = (short) ((code & 0x0F00) >>> 8);
 
-        throw new NotImplementedException();
+        System.arraycopy(vm.V, 0, vm.memory, vm.I, x+1);
+        vm.I += x + 1;
     }
 }
