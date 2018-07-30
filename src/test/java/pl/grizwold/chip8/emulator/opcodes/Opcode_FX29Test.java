@@ -17,7 +17,7 @@ public class Opcode_FX29Test {
     }
 
     @Test
-    public void shouldSetVxToDelayTimer() throws Exception {
+    public void shouldPointIToHexCharacterSpriteInVx() throws Exception {
         short code = (short) 0xFA29;
 
         opcode.execute(code, vm);
