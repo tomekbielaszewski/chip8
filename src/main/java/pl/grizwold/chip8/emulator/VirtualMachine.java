@@ -2,6 +2,7 @@ package pl.grizwold.chip8.emulator;
 
 public class VirtualMachine {
     private final short PROGRAM_START_ADDRESS = 0x200;
+    public final Sprites sprites = new Sprites();
 
     public byte[] memory = new byte[4096];
     public byte[] V = new byte[16]; //VX: V0, ..., VF
