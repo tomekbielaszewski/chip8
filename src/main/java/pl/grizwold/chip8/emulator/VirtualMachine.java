@@ -16,7 +16,7 @@ public class VirtualMachine {
     public byte soundTimer = 0;
 
     public short keyboard = 0;
-    public byte[] screen = new byte[64*32];
+    public boolean[][] screen = new boolean[64][32];
 
     public VirtualMachine() {
         initMemory();
