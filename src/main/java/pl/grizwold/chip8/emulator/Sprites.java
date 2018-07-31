@@ -1,6 +1,7 @@
 package pl.grizwold.chip8.emulator;
 
 public class Sprites {
+    public static final int SPRITE_SIZE = 5;
     public final byte[] SPRITE_0 = new byte[]{
             (byte) 0xF0,
             (byte) 0x90,

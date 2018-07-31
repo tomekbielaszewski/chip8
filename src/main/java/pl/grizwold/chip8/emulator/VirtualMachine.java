@@ -17,4 +17,17 @@ public class VirtualMachine {
 
     public short keyboard = 0;
     public byte[] screen = new byte[64*32];
+
+    public VirtualMachine() {
+        initMemory();
+    }
+
+    private void initMemory() {
+        byte[][] sprites = this.sprites.getSprites();
+
+        for (int i = 0; i < sprites.length; i++) {
+            byte[] sprite = sprites[i];
+            System.arraycopy(sprite, 0, memory, i * Sprites.SPRITE_SIZE, sprite.length);
+        }
+    }
 }
