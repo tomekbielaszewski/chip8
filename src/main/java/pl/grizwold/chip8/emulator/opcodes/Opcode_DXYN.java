@@ -23,11 +23,11 @@ public class Opcode_DXYN implements Opcode {
     }
 
     private byte loadSprite(short n, VirtualMachine vm) {
-        return 0;
+        throw new NotImplementedException();
     }
 
     private boolean drawSprite(short x, short y, byte sprite, VirtualMachine vm) {
-        return false;
+        throw new NotImplementedException();
     }
 
 

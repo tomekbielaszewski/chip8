@@ -16,5 +16,9 @@ public class Opcode_DXYNTest {
         assertTrue(opcode.accept(code));
     }
 
-
+    @Test
+    public void shouldExecuteOpcode() throws Exception {
+        short code = (short) 0xdabb;
+        opcode.execute(code, vm);
+    }
 }
