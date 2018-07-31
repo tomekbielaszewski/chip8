@@ -3,7 +3,7 @@ package pl.grizwold.chip8.emulator.opcodes;
 import org.junit.Test;
 import pl.grizwold.chip8.emulator.VirtualMachine;
 
-import static org.hamcrest.core.Is.is;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -89,4 +89,74 @@ public class Opcode_DXYNTest {
         }
     }
 
+    @Test
+    public void shouldDetectCollisionWithSinglePixel() throws Exception {
+        short code = (short) 0xd451;
+        vm.V[0x4] = 0;
+        vm.V[0x5] = 0;
+        vm.I = 0x201;
+        vm.memory[0x201] = (byte) 0b10000000;
+        vm.screen[0][0] = true;
+
+        opcode.execute(code, vm);
+
+        assertTrue(vm.V[0xF] == 1);
+    }
+
+    @Test
+    public void shouldDetectCollisionWithSinglePixelWhenLightningUpMany() throws Exception {
+        short code = (short) 0xd451;
+        vm.V[0x4] = 0;
+        vm.V[0x5] = 0;
+        vm.I = 0x201;
+        vm.memory[0x201] = (byte) 0b11111111;
+        vm.screen[4][0] = true;
+
+        opcode.execute(code, vm);
+
+        assertTrue(vm.V[0xF] == 1);
+    }
+
+    @Test
+    public void shouldDetectCollisionWhenThereAreManyOfThem() throws Exception {
+        short code = (short) 0xd451;
+        vm.V[0x4] = 0;
+        vm.V[0x5] = 0;
+        vm.I = 0x201;
+        vm.memory[0x201] = (byte) 0b11111111;
+        vm.screen[4][0] = true;
+        vm.screen[6][0] = true;
+
+        opcode.execute(code, vm);
+
+        assertTrue(vm.V[0xF] == 1);
+    }
+
+    @Test
+    public void shouldNotDetectCollisionWhenLightedPixelIsOnTheEdge() throws Exception {
+        short code = (short) 0xd451;
+        vm.V[0x4] = 0;
+        vm.V[0x5] = 0;
+        vm.I = 0x201;
+        vm.memory[0x201] = (byte) 0b11111111;
+        vm.screen[8][0] = true;
+
+        opcode.execute(code, vm);
+
+        assertTrue(vm.V[0xF] == 0);
+    }
+
+    @Test
+    public void shouldDetectSingleCollisionOnTheMiddleOfTheScreen() throws Exception {
+        short code = (short) 0xd451;
+        vm.V[0x4] = 30;
+        vm.V[0x5] = 14;
+        vm.I = 0x201;
+        vm.memory[0x201] = (byte) 0b11111111;
+        vm.screen[36][14] = true;
+
+        opcode.execute(code, vm);
+
+        assertTrue(vm.V[0xF] == 1);
+    }
 }
