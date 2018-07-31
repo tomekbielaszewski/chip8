@@ -11,8 +11,10 @@ public class Opcode_00E0 implements Opcode {
 
     @Override
     public void execute(short code, VirtualMachine vm) {
-        for (int i = 0; i < vm.screen.length; i++) {
-            vm.screen[i] = 0;
+        for (int x = 0; x < vm.screen.length; x++) {
+            for (int y = 0; y < vm.screen[x].length; y++) {
+                vm.screen[x][y] = false;
+            }
         }
     }
 }

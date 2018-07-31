@@ -3,7 +3,9 @@ package pl.grizwold.chip8.emulator.opcodes;
 import org.junit.Test;
 import pl.grizwold.chip8.emulator.VirtualMachine;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class Opcode_00E0Test {
@@ -23,24 +25,31 @@ public class Opcode_00E0Test {
 
         opcode.execute(code, vm);
 
-        for (int i = 0; i < vm.screen.length; i++) {
-            byte pixel = vm.screen[i];
-            assertTrue(pixel == 0);
+        for (int x = 0; x < vm.screen.length; x++) {
+            for (int y = 0; y < vm.screen[x].length; y++) {
+                boolean pixel = vm.screen[x][y];
+                assertThat(pixel, is(false));
+            }
         }
     }
 
     @Test
     public void shouldClearDisplayWhenAllWereOn() throws Exception {
         short code = (short) 0x00E0;
-        for (int i = 0; i < vm.screen.length; i++) {
-            vm.screen[i] = (byte) 0xff;
+
+        for (int x = 0; x < vm.screen.length; x++) {
+            for (int y = 0; y < vm.screen[x].length; y++) {
+                vm.screen[x][y] = true;
+            }
         }
 
         opcode.execute(code, vm);
 
-        for (int i = 0; i < vm.screen.length; i++) {
-            byte pixel = vm.screen[i];
-            assertTrue(pixel == 0);
+        for (int x = 0; x < vm.screen.length; x++) {
+            for (int y = 0; y < vm.screen[x].length; y++) {
+                boolean pixel = vm.screen[x][y];
+                assertThat(pixel, is(false));
+            }
         }
     }
 }
