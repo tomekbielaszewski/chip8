@@ -54,14 +54,16 @@ public class VirtualMachine {
     }
 
     private void cpu() {
-        short code = (short) (((this.memory[PC] & 0xFF) << 8) | (this.memory[PC + 1] & 0xFF));
+        if(PC < memory.length && PC >= 0) {
+            short code = (short) (((memory[PC] & 0xFF) << 8) | (memory[PC + 1] & 0xFF));
 
-        opcodes.getOpcodes().stream()
-                .filter(opcode -> opcode.accept(code))
-                .findFirst().orElseThrow(() -> new UnsupportedOperationException(String.format("Code %s, PC %d", Integer.toHexString(code & 0xffff), PC)))
-                .execute_(code, this);
+            opcodes.getOpcodes().stream()
+                    .filter(opcode -> opcode.accept(code))
+                    .findFirst().orElseThrow(() -> new UnsupportedOperationException(String.format("Code %s, PC %d", Integer.toHexString(code & 0xffff), PC)))
+                    .execute_(code, this);
 
-        PC += 2;
+            PC += 2;
+        }
     }
 
     private void timers() {
