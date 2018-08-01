@@ -2,6 +2,8 @@ package pl.grizwold.chip8.emulator;
 
 import lombok.SneakyThrows;
 
+import java.util.function.Consumer;
+
 public class VirtualMachine {
     private final short PROGRAM_START_ADDRESS = 0x200;
     private final Sprites sprites = new Sprites();
@@ -21,6 +23,7 @@ public class VirtualMachine {
 
     public short keyboard = 0;
     public boolean[][] screen = new boolean[64][32];
+    private boolean finished;
 
     public VirtualMachine() {
         initMemory();
@@ -36,7 +39,7 @@ public class VirtualMachine {
         this.PC = PROGRAM_START_ADDRESS;
     }
 
-    public void start(byte[] cartridge) {
+    public void start(byte[] cartridge, Consumer drawer) {
         loadMemory(cartridge);
         boolean exit = false;
 
@@ -44,17 +47,44 @@ public class VirtualMachine {
             cpu();
             timers();
             exit = shouldExit();
+            drawer.accept(this.screen);
 
             throttle();
         }
     }
 
     private void loadMemory(byte[] cartridge) {
+        System.out.println(String.format("Loaded cartridge. Max Program Counter %d", cartridge.length));
+
+        System.out.println("## Cartridge content: ##");
+        printBytes(cartridge);
+
         System.arraycopy(cartridge, 0, this.memory, PROGRAM_START_ADDRESS, cartridge.length);
+
+        System.out.println("## Memory content: ##");
+        printBytes(memory);
+    }
+
+    private void printBytes(byte[] cartridge) {
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        for (; i < cartridge.length; i++) {
+            byte _byte = cartridge[i];
+
+            if (i % 16 == 0) {
+                System.out.println(sb.toString());
+                sb.delete(0, sb.length());
+
+                sb.append(String.format("%04d | ", i));
+            }
+
+            sb.append(String.format("%02x ", _byte));
+        }
+        System.out.println(sb.toString() + "\n");
     }
 
     private void cpu() {
-        if(PC < memory.length && PC >= 0) {
+        if (PC < memory.length && PC >= 0) {
             short code = (short) (((memory[PC] & 0xFF) << 8) | (memory[PC + 1] & 0xFF));
 
             opcodes.getOpcodes().stream()
@@ -63,6 +93,11 @@ public class VirtualMachine {
                     .execute_(code, this);
 
             PC += 2;
+        } else {
+            if (!finished) {
+                System.out.println("Chip8 Program finished running. PC IOOB.");
+                finished = true;
+            }
         }
     }
 
