@@ -14,8 +14,8 @@ public class Opcode_DXYN implements Opcode {
         short _y = (short) ((code & 0x00F0) >>> 4);
         short n = (short) (code & 0x000F);
 
-        byte x = vm.V[_x];
-        byte y = vm.V[_y];
+        int x = vm.V[_x] & 0xFF;
+        int y = vm.V[_y] & 0xFF;
 
         byte[] sprite = loadSprite(n, vm);
         boolean collision = drawSprite(x, y, sprite, vm);
@@ -33,7 +33,7 @@ public class Opcode_DXYN implements Opcode {
 
         for (int spriteNum = 0; spriteNum < sprite.length; spriteNum++) {
             byte spritePart = sprite[spriteNum];
-            collision |= drawSpritePart(x + (8 * spriteNum), y, spritePart, vm);
+            collision |= drawSpritePart(x, y + spriteNum, spritePart, vm);
         }
 
         return collision;
@@ -45,7 +45,8 @@ public class Opcode_DXYN implements Opcode {
 
         for (int bitNum = 1; bitNum <= 8; bitNum++) {
             int _x = x + bitNum - 1;
-            _x = _x % 64;
+            _x %= 64;
+            y %= 32;
             boolean pixelBefore = vm.screen[_x][y];
             vm.screen[_x][y] ^= isNthBitOn(spritePart, bitNum);
 
