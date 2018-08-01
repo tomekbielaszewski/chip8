@@ -11,6 +11,7 @@ public class Opcode_1NNN implements Opcode {
     @Override
     public void execute(short code, VirtualMachine vm) {
         vm.PC = (short) (0x0FFF & code);
+        vm.PC -= 2;
     }
 
     @Override

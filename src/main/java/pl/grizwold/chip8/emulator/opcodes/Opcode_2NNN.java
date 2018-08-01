@@ -12,6 +12,7 @@ public class Opcode_2NNN implements Opcode {
     public void execute(short code, VirtualMachine vm) {
         vm.stack.push(vm.PC);
         vm.PC = (short) (0x0FFF & code);
+        vm.PC -= 2;
     }
 
     @Override
