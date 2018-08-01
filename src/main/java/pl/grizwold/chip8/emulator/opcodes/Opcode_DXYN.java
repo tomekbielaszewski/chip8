@@ -45,7 +45,7 @@ public class Opcode_DXYN implements Opcode {
 
         for (int bitNum = 1; bitNum <= 8; bitNum++) {
             int _x = x + bitNum - 1;
-            _x = _x >= 64 ? _x - 64 : _x;
+            _x = _x % 64;
             boolean pixelBefore = vm.screen[_x][y];
             vm.screen[_x][y] ^= isNthBitOn(spritePart, bitNum);
 
