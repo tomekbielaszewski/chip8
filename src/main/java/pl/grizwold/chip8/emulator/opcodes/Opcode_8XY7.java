@@ -21,4 +21,14 @@ public class Opcode_8XY7 implements Opcode {
 
         vm.V[x] = (byte) (vm.V[y] - vm.V[x]);
     }
+
+    @Override
+    public String getDescription() {
+        return "Set Vx = Vy - Vx, set VF = NOT borrow. If Vy > Vx, then VF is set to 1, otherwise 0.";
+    }
+
+    @Override
+    public String getAsm(short code) {
+        return String.format("SUBN V%X, V%X", ((code & 0x0F00) >>> 8), ((code & 0x00F0) >>> 4));
+    }
 }

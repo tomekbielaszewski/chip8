@@ -15,4 +15,14 @@ public class Opcode_7XKK implements Opcode {
 
         vm.V[x] = (byte) (vm.V[x] + kk);
     }
+
+    @Override
+    public String getDescription() {
+        return "Set Vx = Vx + kk";
+    }
+
+    @Override
+    public String getAsm(short code) {
+        return String.format("ADD V%X, %X", ((code & 0x0F00) >>> 8), (code & 0x00FF));
+    }
 }

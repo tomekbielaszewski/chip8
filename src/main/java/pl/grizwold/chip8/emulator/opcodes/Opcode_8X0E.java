@@ -15,4 +15,14 @@ public class Opcode_8X0E implements Opcode {
         vm.V[15] = (byte) ((vm.V[x] & INT_TO_BYTE_MASK) >>> 7);
         vm.V[x] = (byte) (vm.V[x] << 1);
     }
+
+    @Override
+    public String getDescription() {
+        return "If the most-significant bit of Vx is 1, then VF is set to 1, otherwise to 0. Then Vx is multiplied by 2.";
+    }
+
+    @Override
+    public String getAsm(short code) {
+        return String.format("SHL V%X", ((code & 0x0F00) >>> 8));
+    }
 }

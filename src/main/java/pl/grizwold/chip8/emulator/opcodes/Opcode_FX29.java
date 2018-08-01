@@ -17,4 +17,14 @@ public class Opcode_FX29 implements Opcode {
         byte spriteSymbol = vm.V[x];
         vm.I = (short) (spriteSymbol * Sprites.SPRITE_SIZE);
     }
+
+    @Override
+    public String getDescription() {
+        return "Set I = location of sprite for digit Vx";
+    }
+
+    @Override
+    public String getAsm(short code) {
+        return String.format("LD F, V%X", ((code & 0x0F00) >>> 8));
+    }
 }

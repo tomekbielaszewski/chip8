@@ -12,4 +12,14 @@ public class Opcode_00EE implements Opcode {
     public void execute(short code, VirtualMachine vm) {
         vm.PC = vm.stack.pop();
     }
+
+    @Override
+    public String getDescription() {
+        return "Return from a subroutine";
+    }
+
+    @Override
+    public String getAsm(short code) {
+        return "RET";
+    }
 }

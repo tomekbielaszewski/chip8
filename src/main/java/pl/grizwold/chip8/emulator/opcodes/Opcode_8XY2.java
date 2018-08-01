@@ -15,4 +15,14 @@ public class Opcode_8XY2 implements Opcode {
 
         vm.V[x] = (byte) (vm.V[y] & vm.V[x]);
     }
+
+    @Override
+    public String getDescription() {
+        return "Set Vx = Vx AND Vy";
+    }
+
+    @Override
+    public String getAsm(short code) {
+        return String.format("AND V%X, V%X", ((code & 0x0F00) >>> 8), ((code & 0x00F0) >>> 4));
+    }
 }

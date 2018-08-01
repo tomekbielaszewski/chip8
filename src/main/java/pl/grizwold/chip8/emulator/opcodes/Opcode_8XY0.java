@@ -15,4 +15,14 @@ public class Opcode_8XY0 implements Opcode {
 
         vm.V[x] = vm.V[y];
     }
+
+    @Override
+    public String getDescription() {
+        return "Set Vx = Vy";
+    }
+
+    @Override
+    public String getAsm(short code) {
+        return String.format("LD V%X, V%X", ((code & 0x0F00) >>> 8), ((code & 0x00F0) >>> 4));
+    }
 }

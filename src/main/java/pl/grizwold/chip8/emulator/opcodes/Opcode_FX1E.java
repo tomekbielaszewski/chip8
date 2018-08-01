@@ -14,4 +14,14 @@ public class Opcode_FX1E implements Opcode {
 
         vm.I = (short) (vm.I + vm.V[x]);
     }
+
+    @Override
+    public String getDescription() {
+        return "Set I = I + Vx";
+    }
+
+    @Override
+    public String getAsm(short code) {
+        return String.format("ADD I, V%X", ((code & 0x0F00) >>> 8));
+    }
 }

@@ -20,4 +20,14 @@ public class Opcode_CXKK implements Opcode {
 
         vm.V[x] = (byte) (kk & rnd[0]);
     }
+
+    @Override
+    public String getDescription() {
+        return "Set Vx = random byte AND kk";
+    }
+
+    @Override
+    public String getAsm(short code) {
+        return String.format("RND V%X, %X", ((code & 0x0F00) >>> 8), (code & 0x00FF));
+    }
 }

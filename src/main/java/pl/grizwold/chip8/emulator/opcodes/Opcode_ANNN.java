@@ -12,4 +12,14 @@ public class Opcode_ANNN implements Opcode {
     public void execute(short code, VirtualMachine vm) {
         vm.I = (short) (0x0FFF & code);
     }
+
+    @Override
+    public String getDescription() {
+        return "Set I = nnn";
+    }
+
+    @Override
+    public String getAsm(short code) {
+        return String.format("LD I, %X", (code & 0x0FFF));
+    }
 }

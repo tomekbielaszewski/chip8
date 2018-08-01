@@ -14,4 +14,14 @@ public class Opcode_FX15 implements Opcode {
 
         vm.delayTimer = vm.V[x];
     }
+
+    @Override
+    public String getDescription() {
+        return "Set delay timer = Vx";
+    }
+
+    @Override
+    public String getAsm(short code) {
+        return String.format("LD DT, V%X", ((code & 0x0F00) >>> 8));
+    }
 }

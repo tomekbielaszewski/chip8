@@ -16,4 +16,14 @@ public class Opcode_FX55 implements Opcode {
         System.arraycopy(vm.V, 0, vm.memory, vm.I, x+1);
         vm.I += x + 1;
     }
+
+    @Override
+    public String getDescription() {
+        return "Store registers V0 through Vx in memory starting at location I";
+    }
+
+    @Override
+    public String getAsm(short code) {
+        return String.format("LD [I], V%X", ((code & 0x0F00) >>> 8));
+    }
 }

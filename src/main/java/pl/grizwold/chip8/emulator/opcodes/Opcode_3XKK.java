@@ -17,4 +17,14 @@ public class Opcode_3XKK implements Opcode {
             vm.PC += 2;
         }
     }
+
+    @Override
+    public String getDescription() {
+        return "Skip next instruction if Vx = kk";
+    }
+
+    @Override
+    public String getAsm(short code) {
+        return String.format("SE V%X, %X", ((code & 0x0F00) >>> 8), (code & 0x00FF));
+    }
 }

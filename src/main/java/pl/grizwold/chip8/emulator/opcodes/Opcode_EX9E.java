@@ -16,4 +16,14 @@ public class Opcode_EX9E implements Opcode {
             vm.PC += 2;
         }
     }
+
+    @Override
+    public String getDescription() {
+        return "Skip next instruction if key with the value of Vx is pressed";
+    }
+
+    @Override
+    public String getAsm(short code) {
+        return String.format("SKP V%X", ((code & 0x0F00) >>> 8));
+    }
 }

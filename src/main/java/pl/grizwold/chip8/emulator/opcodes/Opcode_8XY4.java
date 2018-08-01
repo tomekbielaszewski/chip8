@@ -22,4 +22,14 @@ public class Opcode_8XY4 implements Opcode {
             vm.V[15] = 0;
         }
     }
+
+    @Override
+    public String getDescription() {
+        return "Set Vx = Vx + Vy, set VF = carry. If the result is greater than 8 bits (i.e., > 255,) VF is set to 1, otherwise 0";
+    }
+
+    @Override
+    public String getAsm(short code) {
+        return String.format("ADD V%X, V%X", ((code & 0x0F00) >>> 8), ((code & 0x00F0) >>> 4));
+    }
 }

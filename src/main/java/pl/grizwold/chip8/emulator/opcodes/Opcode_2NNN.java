@@ -13,4 +13,14 @@ public class Opcode_2NNN implements Opcode {
         vm.stack.push(vm.PC);
         vm.PC = (short) (0x0FFF & code);
     }
+
+    @Override
+    public String getDescription() {
+        return "Call subroutine at nnn";
+    }
+
+    @Override
+    public String getAsm(short code) {
+        return "CALL " + Integer.toHexString((0x0FFF & code) & 0xFFF);
+    }
 }

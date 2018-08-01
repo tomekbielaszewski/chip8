@@ -31,4 +31,14 @@ public class Opcode_FX33 implements Opcode {
         vm.memory[vm.I + 1] = tens;
         vm.memory[vm.I + 2] = ones;
     }
+
+    @Override
+    public String getDescription() {
+        return "Store BCD representation of Vx in memory locations I, I+1, and I+2";
+    }
+
+    @Override
+    public String getAsm(short code) {
+        return String.format("LD B, V%X", ((code & 0x0F00) >>> 8));
+    }
 }

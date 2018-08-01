@@ -36,4 +36,14 @@ public class Opcode_FX0A implements Opcode {
     private boolean isNthBitOn(short num, byte whichBit) {
         return (num & (1 << (whichBit - 1))) >= 1;
     }
+
+    @Override
+    public String getDescription() {
+        return "Wait for a key press, store the value of the key in Vx";
+    }
+
+    @Override
+    public String getAsm(short code) {
+        return String.format("LD V%X, K", ((code & 0x0F00) >>> 8));
+    }
 }

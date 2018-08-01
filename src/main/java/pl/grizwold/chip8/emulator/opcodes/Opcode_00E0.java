@@ -17,4 +17,14 @@ public class Opcode_00E0 implements Opcode {
             }
         }
     }
+
+    @Override
+    public String getDescription() {
+        return "Clear the display";
+    }
+
+    @Override
+    public String getAsm(short code) {
+        return "CLS";
+    }
 }

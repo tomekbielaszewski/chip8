@@ -62,4 +62,14 @@ public class Opcode_DXYN implements Opcode {
     private byte reverse(byte _byte) {
         return (byte) (Integer.reverse(_byte) >>> (Integer.SIZE - Byte.SIZE));
     }
+
+    @Override
+    public String getDescription() {
+        return "Display n-byte sprite starting at memory location I at (Vx, Vy), set VF = collision";
+    }
+
+    @Override
+    public String getAsm(short code) {
+        return String.format("DRW V%X, V%X, %X", ((code & 0x0F00) >>> 8), ((code & 0x00F0) >>> 4), (code & 0x000F));
+    }
 }

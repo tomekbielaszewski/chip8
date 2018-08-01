@@ -12,4 +12,14 @@ public class Opcode_BNNN implements Opcode {
     public void execute(short code, VirtualMachine vm) {
         vm.PC = (short) ((0x0FFF & code) + vm.V[0]);
     }
+
+    @Override
+    public String getDescription() {
+        return "Jump to location nnn + V0";
+    }
+
+    @Override
+    public String getAsm(short code) {
+        return String.format("JP V0, %X", (code & 0x0FFF));
+    }
 }

@@ -14,4 +14,14 @@ public class Opcode_FX18 implements Opcode {
 
         vm.soundTimer = vm.V[x];
     }
+
+    @Override
+    public String getDescription() {
+        return "Set sound timer = Vx";
+    }
+
+    @Override
+    public String getAsm(short code) {
+        return String.format("LD ST, V%X", ((code & 0x0F00) >>> 8));
+    }
 }
