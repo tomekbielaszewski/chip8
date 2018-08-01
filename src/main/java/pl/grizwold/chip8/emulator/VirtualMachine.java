@@ -22,11 +22,18 @@ public class VirtualMachine {
     public short keyboard = 0;
     public boolean[][] screen = new boolean[64][32];
 
+    public VirtualMachine() {
+        initMemory();
+        this.frequency = 50;
+        this.PC = PROGRAM_START_ADDRESS;
+    }
+
     public VirtualMachine(int frequency) {
         initMemory();
         if (frequency >= 1000) frequency = 999;
         if (frequency <= 0) frequency = 1;
         this.frequency = frequency;
+        this.PC = PROGRAM_START_ADDRESS;
     }
 
     public void start(byte[] cartridge) {
@@ -47,12 +54,12 @@ public class VirtualMachine {
     }
 
     private void cpu() {
-        short code = (short) ((this.memory[PC] << 8) + this.memory[PC + 1]);
+        short code = (short) (((this.memory[PC] & 0xFF) << 8) | (this.memory[PC + 1] & 0xFF));
 
         opcodes.getOpcodes().stream()
                 .filter(opcode -> opcode.accept(code))
-                .findFirst().orElseThrow(UnsupportedOperationException::new)
-                .execute(code, this);
+                .findFirst().orElseThrow(() -> new UnsupportedOperationException(String.format("Code %s, PC %d", Integer.toHexString(code & 0xffff), PC)))
+                .execute_(code, this);
 
         PC += 2;
     }
