@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 public class Chip8EmulatorStarter {
 
     public static void main(String[] args) throws IOException {
-        InputStream inputStream = Files.newInputStream(Paths.get("C:\\Programming\\Prv\\chip8\\src\\main\\resources\\15PUZZLE.ch8"));
+        InputStream inputStream = Files.newInputStream(Paths.get("C:\\Programming\\Prv\\chip8\\src\\main\\resources\\C8PIC.ch8"));
         byte[] bytes = IOUtils.toByteArray(inputStream);
 
         VirtualMachine vm = new VirtualMachine(50);
