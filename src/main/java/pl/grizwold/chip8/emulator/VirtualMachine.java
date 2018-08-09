@@ -3,6 +3,7 @@ package pl.grizwold.chip8.emulator;
 import lombok.SneakyThrows;
 
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class VirtualMachine {
     private final short PROGRAM_START_ADDRESS = 0x200;
@@ -39,7 +40,7 @@ public class VirtualMachine {
         this.PC = PROGRAM_START_ADDRESS;
     }
 
-    public void start(byte[] cartridge, Consumer drawer) {
+    public void start(byte[] cartridge, Consumer drawer, Supplier<Short> keyboardSupplier) {
         loadMemory(cartridge);
         boolean exit = false;
 
@@ -48,6 +49,7 @@ public class VirtualMachine {
             timers();
             exit = shouldExit();
             drawer.accept(this.screen);
+            keyboard = keyboardSupplier.get();
 
             throttle();
         }
@@ -112,7 +114,7 @@ public class VirtualMachine {
 
     @SneakyThrows
     private void throttle() {
-        Thread.sleep(this.frequency / 1000);
+        Thread.sleep(1000 / this.frequency);
     }
 
     private void initMemory() {
