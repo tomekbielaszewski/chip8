@@ -13,8 +13,10 @@ public class Opcode_FX0A implements Opcode {
     public void execute(short code, VirtualMachine vm) {
         short x = (short) ((code & 0x0F00) >>> 8);
 
-        while (!isKeyPressed(vm.keyboard)) {
+        if(isKeyPressed(vm.keyboard)) {
             vm.V[x] = getKeyValue(vm.keyboard);
+        } else {
+            vm.PC -= 2;
         }
     }
 
