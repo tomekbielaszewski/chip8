@@ -4,7 +4,6 @@ import org.junit.Test;
 import pl.grizwold.chip8.emulator.VirtualMachine;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -51,5 +50,15 @@ public class Opcode_00E0Test {
                 assertThat(pixel, is(false));
             }
         }
+    }
+
+    @Test
+    public void shouldSetRepaintFlag() throws Exception {
+        short code = (short) 0x00E0;
+        vm.repaint = false;
+
+        opcode.execute(code, vm);
+
+        assertTrue(vm.repaint);
     }
 }

@@ -199,4 +199,14 @@ public class Opcode_DXYNTest {
         }
         assertThat(vm.screen[7][0], is(false));
     }
+
+    @Test
+    public void shouldSetRepaintFlag() throws Exception {
+        short code = (short) 0xd451;
+        vm.repaint = false;
+
+        opcode.execute(code, vm);
+
+        assertTrue(vm.repaint);
+    }
 }
