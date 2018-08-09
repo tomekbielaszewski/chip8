@@ -159,4 +159,44 @@ public class Opcode_DXYNTest {
 
         assertTrue(vm.V[0xF] == 1);
     }
+
+    @Test
+    public void shouldLightUpSinglePixelAndThenTurnItOffWithCollisionDetection() throws Exception {
+        short code = (short) 0xd451;
+        vm.V[0x4] = 0;
+        vm.V[0x5] = 0;
+        vm.I = 0x201;
+        vm.memory[0x201] = (byte) 0b00000001;
+
+        opcode.execute(code, vm);
+        assertThat(vm.screen[7][0], is(true));
+
+        vm.I = 0x201;
+        vm.memory[0x201] = (byte) 0b00000001;
+
+        opcode.execute(code, vm);
+
+        assertThat(vm.screen[7][0], is(false));
+        assertTrue(vm.V[0xF] == 1);
+    }
+
+    @Test
+    public void shouldSwitchLastBitKeepingAllOthersIntact() throws Exception {
+        short code = (short) 0xd451;
+        vm.V[0x4] = 0;
+        vm.V[0x5] = 0;
+        vm.I = 0x201;
+        vm.memory[0x201] = (byte) 0b00000001;
+        for (int x = 0; x < 8; x++) {
+            vm.screen[x][0] = true;
+        }
+
+        opcode.execute(code, vm);
+
+
+        for (int x = 0; x < 7; x++) {
+            assertThat(vm.screen[x][0], is(true));
+        }
+        assertThat(vm.screen[7][0], is(false));
+    }
 }
