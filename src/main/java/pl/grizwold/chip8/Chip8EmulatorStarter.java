@@ -37,10 +37,10 @@ public class Chip8EmulatorStarter extends Application {
 
         boolean[] keys = new boolean[16];
         KeyCode[] keyCodes = new KeyCode[]{
-                KeyCode.DIGIT1, KeyCode.DIGIT2, KeyCode.DIGIT3, KeyCode.DIGIT4,
-                KeyCode.Q, KeyCode.W, KeyCode.E, KeyCode.R,
-                KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.F,
-                KeyCode.Z, KeyCode.X, KeyCode.C, KeyCode.V
+                KeyCode.X, KeyCode.DIGIT1, KeyCode.DIGIT2, KeyCode.DIGIT3,
+                KeyCode.Q, KeyCode.W, KeyCode.E, KeyCode.A,
+                KeyCode.S, KeyCode.D, KeyCode.Z, KeyCode.C,
+                KeyCode.DIGIT4, KeyCode.R, KeyCode.F, KeyCode.V
         };
 
         primaryStage.getScene().setOnKeyPressed(event -> {
