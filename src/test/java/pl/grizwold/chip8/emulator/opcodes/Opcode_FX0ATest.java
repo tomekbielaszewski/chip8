@@ -1,14 +1,9 @@
 package pl.grizwold.chip8.emulator.opcodes;
 
-import lombok.SneakyThrows;
 import org.junit.Test;
 import pl.grizwold.chip8.emulator.VirtualMachine;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 public class Opcode_FX0ATest {
     private final VirtualMachine vm = new VirtualMachine();
@@ -46,7 +41,7 @@ public class Opcode_FX0ATest {
 
             opcode.execute(code, vm);
 
-            assertTrue(vm.V[0xA] == i + 1);
+            assertTrue(vm.V[0xA] == i);
             assertTrue(vm.PC == 100);
         }
     }

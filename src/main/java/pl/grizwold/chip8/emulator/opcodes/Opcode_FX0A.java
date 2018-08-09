@@ -21,7 +21,7 @@ public class Opcode_FX0A implements Opcode {
     }
 
     private byte getKeyValue(short keyboard) {
-        for (byte bitNum = 1; bitNum <= 16; bitNum++) {
+        for (byte bitNum = 0; bitNum < 16; bitNum++) {
             if (isNthBitOn(keyboard, bitNum)) {
                 return bitNum;
             }
@@ -36,7 +36,7 @@ public class Opcode_FX0A implements Opcode {
     }
 
     private boolean isNthBitOn(short num, byte whichBit) {
-        return (num & (1 << (whichBit - 1))) >= 1;
+        return (num & (1 << whichBit)) >= 1;
     }
 
     @Override
