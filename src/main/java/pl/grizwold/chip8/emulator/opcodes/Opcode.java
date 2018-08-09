@@ -16,7 +16,7 @@ public interface Opcode {
     String getAsm(short code);
 
     default void execute_(short code, VirtualMachine vm) {
-        System.out.println(String.format("%-3d: [%-4X] %-15s\\\\ %-115s |  I = %-5X V%s", vm.PC, (code & 0xFFFF), getAsm(code), getDescription(), vm.I, Arrays.toString(vm.V)));
+        System.out.println(String.format("%-3d: [%-4X] %-15s\\\\ %-115s |  I = %-5X keyboard 0b%16s V%s", vm.PC, (code & 0xFFFF), getAsm(code), getDescription(), vm.I, Integer.toBinaryString(vm.keyboard), Arrays.toString(vm.V)));
         this.execute(code, vm);
     }
 }
