@@ -3,7 +3,7 @@ package pl.grizwold.chip8.emulator.opcodes;
 import org.junit.Test;
 import pl.grizwold.chip8.emulator.VirtualMachine;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class Opcode_2NNNTest {
     private final VirtualMachine vm = new VirtualMachine();
@@ -28,6 +28,8 @@ public class Opcode_2NNNTest {
         short stackPopAfter = vm.stack.pop();
         assertTrue(stackPopBefore == 0);
         assertTrue(stackPopAfter == pcBefore);
-        assertTrue(vm.PC == 0xaaa);
+
+        //PC needs to be decremented by 2 becouse just after opcode evaluation it is incremented by 2 by defaul
+        assertTrue(vm.PC == (0xaaa - 2));
     }
 }
