@@ -16,6 +16,7 @@ public class Opcode_00E0 implements Opcode {
                 vm.screen[x][y] = false;
             }
         }
+        vm.repaint = true;
     }
 
     @Override

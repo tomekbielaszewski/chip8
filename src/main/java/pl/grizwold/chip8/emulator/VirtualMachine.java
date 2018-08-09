@@ -24,6 +24,8 @@ public class VirtualMachine {
 
     public short keyboard = 0;
     public boolean[][] screen = new boolean[64][32];
+    public boolean repaint;
+
     private boolean finished;
 
     public VirtualMachine() {
@@ -48,7 +50,10 @@ public class VirtualMachine {
             cpu();
             timers();
             exit = shouldExit();
-            drawer.accept(this.screen);
+            if(this.repaint) {
+                drawer.accept(this.screen);
+                this.repaint = false;
+            }
             keyboard = keyboardSupplier.get();
 
             throttle();

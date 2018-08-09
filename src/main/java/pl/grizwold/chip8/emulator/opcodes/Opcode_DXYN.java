@@ -20,6 +20,7 @@ public class Opcode_DXYN implements Opcode {
         byte[] sprite = loadSprite(n, vm);
         boolean collision = drawSprite(x, y, sprite, vm);
         vm.V[0xF] = (byte) (collision ? 1 : 0);
+        vm.repaint = true;
     }
 
     private byte[] loadSprite(short n, VirtualMachine vm) {
