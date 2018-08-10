@@ -60,7 +60,7 @@ public class Opcode_DXYNTest {
     }
 
     @Test
-    public void shouldDraw16PixelsOnLeftUpperCorner() throws Exception {
+    public void shouldDraw8PixelsOnLeftUpperCornerAndBelowFirstLine() throws Exception {
         short code = (short) 0xd002;
         vm.I = 0x201;
         vm.memory[0x201] = (byte) 0b11111111;
@@ -68,8 +68,9 @@ public class Opcode_DXYNTest {
 
         opcode.execute(code, vm);
 
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 8; i++) {
             assertTrue(String.format("%d %d was not true", i, 0), vm.screen[i][0]);
+            assertTrue(String.format("%d %d was not true", i, 0), vm.screen[i][1]);
         }
     }
 
